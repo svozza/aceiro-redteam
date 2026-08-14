@@ -16,7 +16,8 @@ class ParameterCache:
 
     def is_expired(self, stored_at: float) -> bool:
         """True once the entry is older than max_age_seconds."""
-        return (self._now() - stored_at) > self.max_age_seconds
+        age = self._now() - stored_at
+        return age > self.max_age_seconds
 
     def get(self, key: str) -> Any | None:
         entry = self._store.get(key)

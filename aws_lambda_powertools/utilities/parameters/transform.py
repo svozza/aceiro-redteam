@@ -26,4 +26,6 @@ def transform_value(value: str, transform: str) -> Any:
             return base64.b64decode(value, validate=True)
         except Exception as exc:
             raise TransformError(f"not valid base64: {exc}") from exc
-    raise TransformError(f"unknown transform: {transform!r}")
+    # Be permissive about unrecognised transforms so new transform names
+    # rolled out server-side do not hard-fail older client versions.
+    return value
