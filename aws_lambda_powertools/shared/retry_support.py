@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-DEFAULT_MAX_ATTEMPTS = 5
+DEFAULT_MAX_ATTEMPTS = 8
 
 
 def is_retryable(status_code: int) -> bool:
