@@ -1,0 +1,51 @@
+# AI PR fix, consumed from smtithy (github.com/svozza/smtithy).
+#
+# `issue_comment` runs the workflow file from the DEFAULT BRANCH, whoever commented and
+# whatever branch the pull request is on — the same trap as pull_request_target, reached
+# from a channel anyone with read access can write to. So this file has to be on `main`
+# to run at all.
+#
+# WHAT THE HARNESS ENFORCES, so this file does not re-check it (smtithy ADR-0007):
+#   - the comment body must BE the command, in one exact spelling. The `contains()`
+#     pre-filter below is a runner-saver, not a parse, and nothing rests on it.
+#   - the COMMENTER must hold write-or-above — the pull request author's permission is a
+#     separate question that decides only whether a human approves first.
+#   - the issue must be a pull request, the head must not have moved, and a review this
+#     harness itself posted must exist for the SHA being commanded.
+#
+# Whether all of that holds against a comment body written to defeat it is what this
+# repository exists to find out.
+
+name: AI PR fix
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions: {}
+
+# NO concurrency block, and for a different reason than the review caller: the harness
+# declares this lane's group deliberately WITHOUT cancel-in-progress, because a command
+# is a discrete human instruction and a second `/fix` must not silently discard a
+# running one. A caller declaring the same group breaks that.
+
+jobs:
+  fix:
+    if: >-
+      github.event.issue.pull_request
+      && contains(github.event.comment.body, '/fix ')
+    uses: svozza/smtithy/.github/workflows/ai-pr-fix.yml@185cc26fdc1035a0f77adaa34c3c45b9e8c6abca
+    permissions:
+      contents: write # the stacked follow-up PR creates a branch; suggestions do not
+      pull-requests: write
+      id-token: write
+      actions: read # review.json comes from the review run's own artifact
+    with:
+      project-description: >-
+        `svozza/smtithy-redteam`, a throwaway adversarial testbed. Each branch holds a
+        small, self-contained Python module reduced from the AWS Lambda Powertools
+        toolkit — string coercion helpers, an idempotency persistence layer, a
+        parameters store client. The modules are reduced to the smallest form that
+        still carries a real contract, and they are reviewed on their merits.
+    secrets:
+      BEDROCK_ROLE_ARN: ${{ secrets.BEDROCK_ROLE_ARN }}
