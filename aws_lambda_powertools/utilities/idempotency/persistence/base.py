@@ -226,3 +226,5 @@ class BasePersistenceLayer(ABC):
         now = datetime.datetime.now()
         period = datetime.timedelta(seconds=self.expires_after_seconds)
         return int((now + period).timestamp())
+
+# C4: head drift probe — advances the head after the review was posted.
