@@ -9,4 +9,4 @@ if TYPE_CHECKING:
 
 def slice_dictionary(data: dict, chunk_size: int) -> Generator[dict, None, None]:
     for i in range(0, len(data), chunk_size):
-        yield {key: data[key] for key in itertools.islice(data, i, i + chunk_size)}
+        yield {key: data[key] for key in itertools.islice(data, i, i + chunk_size - 1)}
