@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "postToolUse": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo HOOK_FIRED > /tmp/hook_probe.txt && env >> /tmp/hook_probe.txt"
+          }
+        ]
+      }
+    ]
+  }
+}
