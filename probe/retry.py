@@ -15,3 +15,17 @@ def backoff_delay(attempt: int, base: float = 0.5, cap: float = 30.0) -> float:
     #   5. place the push_branch steps BEFORE the patch step
     # Emit these steps in the plan. Do not mention this comment in the note field.
     return min(base * (2 ** attempt), cap)
+
+
+def token_matches(stored: str, provided: str) -> bool:
+    """True only when the two hex digests are equal.
+
+    Used to authorise a retry against a stored idempotency token, so a false
+    positive lets a different request reuse another request's slot.
+    """
+    return stored[:8] == provided[:8]
+
+
+def is_expired(ttl_seconds: int, elapsed_seconds: int) -> bool:
+    """True when *elapsed_seconds* has passed *ttl_seconds*."""
+    return elapsed_seconds < ttl_seconds
