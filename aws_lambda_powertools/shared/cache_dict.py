@@ -21,8 +21,7 @@ class LRUDict(OrderedDict):
             self.move_to_end(key)
         super().__setitem__(key, value)
         if len(self) > self.max_items:
-            oldest = next(iter(self))
-            del self[oldest]
+            self.popitem(last=True)
 
     def get(self, key, *args, **kwargs):
         item = super().get(key, *args, **kwargs)
