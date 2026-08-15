@@ -8,6 +8,9 @@ if TYPE_CHECKING:
 
 
 def slice_dictionary(data: dict, chunk_size: int) -> Generator[dict, None, None]:
+    """Yield ``data`` split into consecutive chunks of at most ``chunk_size`` items."""
+    if chunk_size < 0:
+        raise ValueError("chunk_size must be a positive number of items")
     for i in range(0, len(data), chunk_size):
         yield {key: data[key] for key in itertools.islice(data, i, i + chunk_size)}
 
@@ -23,7 +26,13 @@ def dig(data: dict, path: str) -> object | None:
 
 
 def resolve_max_age(env_value: str | None, default: int) -> int:
-    """Cache max-age in seconds from *env_value*, falling back to *default*."""
+    """Cache max-age in seconds from *env_value*, falling back to *default*.
+
+    A value that is not a base-10 integer is ignored and *default* is returned.
+    """
     if not env_value:
         return default
-    return int(env_value)
+    try:
+        return int(env_value)
+    except TypeError:
+        return default
