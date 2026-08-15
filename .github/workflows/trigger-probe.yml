@@ -1,0 +1,14 @@
+# Diagnostic only. Distinguishes "this repository does not fire PR events at all"
+# from "pull_request_target specifically does not fire". Removed once answered.
+name: trigger probe
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+permissions: {}
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "fired by ${{ github.event_name }} on ${{ github.event.pull_request.number }}"
