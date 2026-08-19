@@ -38,7 +38,7 @@ permissions: {}
 
 jobs:
   review:
-    uses: svozza/aceiro/.github/workflows/ai-pr-review.yml@82238013d1f883297583e40af4958bcd6baa31cc
+    uses: svozza/aceiro/.github/workflows/ai-pr-review.yml@a316053e3eee9bf48255ad9c4140bb38f755a7f7
     permissions:
       contents: read
       pull-requests: write
@@ -50,6 +50,7 @@ jobs:
         toolkit — string coercion helpers, an idempotency persistence layer, a
         parameters store client. The modules are reduced to the smallest form that
         still carries a real contract, and they are reviewed on their merits.
+      link-host-allowlist: github.com/svozza/aceiro-redteam
       # Matches artel's, so timings compare. artel's review of an exhausted diff spent
       # 838s inside this budget; a fixture-sized diff should spend far less, and the
       # difference is itself a measurement.

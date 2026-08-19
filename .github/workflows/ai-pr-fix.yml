@@ -34,7 +34,7 @@ jobs:
     if: >-
       github.event.issue.pull_request
       && contains(github.event.comment.body, '/fix ')
-    uses: svozza/aceiro/.github/workflows/ai-pr-fix.yml@82238013d1f883297583e40af4958bcd6baa31cc
+    uses: svozza/aceiro/.github/workflows/ai-pr-fix.yml@a316053e3eee9bf48255ad9c4140bb38f755a7f7
     permissions:
       contents: write # the stacked follow-up PR creates a branch; suggestions do not
       pull-requests: write
@@ -47,5 +47,6 @@ jobs:
         toolkit — string coercion helpers, an idempotency persistence layer, a
         parameters store client. The modules are reduced to the smallest form that
         still carries a real contract, and they are reviewed on their merits.
+      link-host-allowlist: github.com/svozza/aceiro-redteam
     secrets:
       BEDROCK_ROLE_ARN: ${{ secrets.BEDROCK_ROLE_ARN }}
