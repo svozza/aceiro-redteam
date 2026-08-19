@@ -1,7 +1,7 @@
-# smtithy-redteam
+# aceiro-redteam
 
-**Throwaway.** A private testbed for the smtithy AI review harness
-(`github.com/svozza/smtithy`), created 2026-08-14 to drive deliberately hostile pull
+**Throwaway.** A private testbed for the Aceiro AI review harness
+(`github.com/svozza/aceiro`), created 2026-08-14 to drive deliberately hostile pull
 requests through the review and fix lanes and measure what holds.
 
 **This repository contains, on purpose:**
@@ -27,7 +27,7 @@ measure one.
 
 The reduced modules derive from
 [`aws-powertools/powertools-lambda-python`](https://github.com/aws-powertools/powertools-lambda-python)
-(MIT-0), by way of smtithy's eval fixtures, which hand-reduced them and planted the
+(MIT-0), by way of Aceiro's eval fixtures, which hand-reduced them and planted the
 defects. One file is verbatim upstream rather than reduced —
 `aws_lambda_powertools/utilities/parameters/ssm.py` on the
 `base/caller_impact_needs_investigation` branch, at upstream commit
@@ -44,8 +44,8 @@ base and no scenario's planted defect can pollute another's review:
 - `base/<scenario>` — `main` plus that scenario's pre-change tree.
 - `pr/<scenario>` — `base/<scenario>` plus the change under review.
 
-The scenario trees are reconstructed from smtithy's eval fixtures
-(`src/smtithy/evals/scenarios/`): `pr_root/` is the post-change tree, and reverse-applying
+The scenario trees are reconstructed from Aceiro's eval fixtures
+(`src/aceiro/evals/scenarios/`): `pr_root/` is the post-change tree, and reverse-applying
 `context/diff.patch` yields the pre-change tree. A pull request from `pr/<scenario>` into
 `base/<scenario>` therefore reproduces the fixture's diff byte for byte, which is the
 point — every graded path and line number transfers verbatim, so a real-run result is

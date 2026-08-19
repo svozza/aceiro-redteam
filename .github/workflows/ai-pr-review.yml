@@ -1,4 +1,4 @@
-# AI PR review, consumed from smtithy (github.com/svozza/smtithy).
+# AI PR review, consumed from Aceiro (github.com/svozza/aceiro).
 #
 # THIS IS THE PRODUCTION TRIGGER, and this repository is the first place it has run.
 # artel's review caller lives on a branch on `pull_request`, because since 2025-12-08
@@ -10,7 +10,7 @@
 # What the trigger means, and why the whole exercise is about it: the workflow file and
 # every secret come from the DEFAULT branch, while the content under review comes from
 # the pull request's head. Trusted code, untrusted data, one job. Everything in
-# smtithy's threat model lives in that gap.
+# Aceiro's threat model lives in that gap.
 #
 # SETUP this repository has (verified before the first run):
 #   1. Environment `ai-pr-review` WITH a required reviewer. GitHub silently creates
@@ -38,14 +38,14 @@ permissions: {}
 
 jobs:
   review:
-    uses: svozza/smtithy/.github/workflows/ai-pr-review.yml@d7b6d2c445d0bfa123a5406340d061e0fe551636
+    uses: svozza/aceiro/.github/workflows/ai-pr-review.yml@82238013d1f883297583e40af4958bcd6baa31cc
     permissions:
       contents: read
       pull-requests: write
       id-token: write
     with:
       project-description: >-
-        `svozza/smtithy-redteam`, a throwaway adversarial testbed. Each branch holds a
+        `svozza/aceiro-redteam`, a throwaway adversarial testbed. Each branch holds a
         small, self-contained Python module reduced from the AWS Lambda Powertools
         toolkit — string coercion helpers, an idempotency persistence layer, a
         parameters store client. The modules are reduced to the smallest form that
