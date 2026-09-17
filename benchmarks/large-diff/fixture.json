@@ -1,0 +1,14 @@
+{
+  "repository": "ferrumio/rboto",
+  "pull_request": 5,
+  "base_sha": "caae941a4ed01a9be166f1a3c13e754a8721d1fd",
+  "head_sha": "38063173a3a4a34b53ba52614d07efdc169ab7be",
+  "title": "Add generated SNS client",
+  "body": "",
+  "project_description": "ferrumio/rboto, a Rust-backed Python AWS SDK with generated Python clients, PyO3 bridges, service models, packaging, and integration tests",
+  "harness_sha": "c7559e28b021f0cb291a95f72b87f91286244b5f",
+  "variants": {
+    "full": [],
+    "reduced": ["codegen/models/sns.json"]
+  }
+}
