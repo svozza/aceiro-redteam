@@ -37,10 +37,14 @@ real code the scenario did not author.
 
 ## Layout
 
+`benchmarks/large-diff/` provides a manual model and prompt comparison using a
+pinned public PR. See its [instructions](benchmarks/large-diff/README.md).
+It records completion and timing separately from review quality.
+
 One base branch per scenario, so each pull request's base tree is exactly the fixture's
 base and no scenario's planted defect can pollute another's review:
 
-- `main` — this README and the two caller workflows. Nothing else.
+- `main` — documentation, caller workflows, diagnostic files, and benchmark tooling.
 - `base/<scenario>` — `main` plus that scenario's pre-change tree.
 - `pr/<scenario>` — `base/<scenario>` plus the change under review.
 
