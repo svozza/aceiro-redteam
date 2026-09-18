@@ -56,7 +56,7 @@ jobs:
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           repository: svozza/aceiro
-          ref: c7559e28b021f0cb291a95f72b87f91286244b5f
+          ref: ab3f800ef36a70f38200715039a47731e55c8ded
           path: harness
           persist-credentials: false
       - name: Set up uv
