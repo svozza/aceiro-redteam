@@ -57,3 +57,22 @@ PYTHONHASHSEED=0 harness/.venv/bin/python benchmarks/large-diff/run.py \
 ```
 
 Use fresh work/output directories for each invocation.
+
+## Bounded-investigation prompt experiment
+
+`prompts/opus5-bounded-investigation.md` derives from the pinned harness prompt.
+It adds a soft ceiling of 12 read/search calls, prioritizes concrete questions,
+and directs the model to submit confirmed findings with honest residual risk
+when that investigation budget is spent. Finding criteria and trust boundaries
+are preserved. The hard 50-minute timer is unchanged.
+
+The first full-fixture pilot completed with Opus 4.8 after 8 investigation calls
+and one submission; Opus 5 made 66 calls without submitting before timeout.
+The 12-call target tests whether explicit completion guidance helps. It is a
+prompt instruction, not an enforced security boundary.
+
+Run this variant with `variant=full`, `model=opus-5`, `runs=1`, and
+`prompt=opus5-bounded-investigation.md`. Compare it with the unchanged-prompt
+full Opus 5 pilot before varying other settings. A faster valid submission is
+not sufficient for production adoption: inspect finding quality and coverage,
+then test against known-defect fixtures separately.
