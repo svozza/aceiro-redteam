@@ -71,6 +71,12 @@ and one submission; Opus 5 made 66 calls without submitting before timeout.
 The 12-call target tests whether explicit completion guidance helps. It is a
 prompt instruction, not an enforced security boundary.
 
+The copied AWS Lambda toolkit introduction is the harness's substitution marker.
+`run.py` sets `ACEIRO_PROJECT_DESCRIPTION` from the public fixture, and the pinned
+harness's `apply_project_description` replaces that entire marker before the
+model runs. The rendered introduction identifies `ferrumio/rboto`; preserving
+the marker is required for that substitution to succeed.
+
 Run this variant with `variant=full`, `model=opus-5`, `runs=1`, and
 `prompt=opus5-bounded-investigation.md`. Compare it with the unchanged-prompt
 full Opus 5 pilot before varying other settings. A faster valid submission is
